@@ -1,36 +1,48 @@
+import 'package:aula_01/domen/conversa.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class ChatListPage extends StatelessWidget {
-  const ChatListPage({super.key});
-
+  List<Conversa> conversa = [
+    Conversa (
+      contato:"joão gabriel",
+      ultimaMsg:"prox jogo do flamengo",
+      hora:"15:45",
+      naoLidas: 1,
+    ),
+    Conversa(
+      contato: "gabriel",
+      ultimaMsg: "data da final da libertadores",
+      hora:"4:00",
+      naoLidas: 1,
+    ),
+  ];
+  ChatListPage({super.key});
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Conversas'),
+        
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            leading: const CircleAvatar(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              child: Text('J'),
-            ),
-            title: const Text('João'),
-            subtitle: const Text('22'),
-          ),
-          ListTile(
-            leading: const CircleAvatar(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              child: Text('G'),
-            ),
-            title: const Text('Gabriel'),
-            subtitle: const Text('22'),
-          ),
-        ],
+      body: ListView.builder(itemBuilder: (context, int i)
+       {
+        
+        return  ListTile(
+          
+          title: Text('conversa,contato'),
+          subtitle: const Text('Mensagem de exemplo'),
+          onTap: () {
+            // Ação ao tocar na conversa
+          },
+        );
+      }
+      
+         
       ),
     );
   }
 }
+
+              

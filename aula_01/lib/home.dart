@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class MyHome extends StatelessWidget {
+  const MyHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('ola')),
+    return Scaffold(appBar: AppBar(title: Text('PDM')),
     body: Container(color: const Color.fromARGB(255, 255, 204, 0)),
     floatingActionButton: FloatingActionButton(
       onPressed: () {},
       tooltip: 'Increment',
-      child: const Icon(Icons.add),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.add),
+          Text('Nova conversa'),
+        ],
+      ),
     ));
     
   }

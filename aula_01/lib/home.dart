@@ -1,23 +1,45 @@
+import 'package:aula_01/features/chat/presentation/pages/conversa_list_page.dart';
 import 'package:flutter/material.dart';
 
-class MyHome extends StatelessWidget {
-  const MyHome({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('PDM')),
-    body: Container(color: const Color.fromARGB(255, 255, 204, 0)),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {},
-      tooltip: 'Increment',
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(Icons.add),
-          Text('Nova conversa'),
+    return Scaffold(
+      appBar: AppBar(title: Text('TADS IV')),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Text('Módulos', style: TextStyle(fontSize: 16)),
+          ),
+          ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            children: [
+              Card(
+                elevation: 0.5,
+                child: ListTile(
+                  title: Text('Chat'),
+                  trailing: IconButton(
+                    icon: Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ConversaListPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
-    ));
-    
+    );
   }
 }

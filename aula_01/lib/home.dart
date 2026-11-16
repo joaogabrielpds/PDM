@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 8),
 
             const Text(
-              'Escolha um módulo.',
+              'a loja virtual.',
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.black54,
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
          
             const SizedBox(height: 16),
 
-            // Módulo de produtos
+            
             _buildModuleCard(
               context: context,
               title: 'Catálogo de Produtos',

@@ -29,14 +29,14 @@ class ProductListPage extends StatelessWidget {
         ),
         body: BlocBuilder<ProductListBloc, ProductListState>(
           builder: (context, state) {
-            // Carregamento
+            // Carregamento da pagina 
             if (state is ProductListLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
 
-            // Produtos carregados
+            // amostragem dos Produtos carregados
             if (state is ProductListLoadedState) {
               if (state.products.isEmpty) {
                 return const Center(
@@ -106,7 +106,7 @@ class ProductListPage extends StatelessWidget {
               );
             }
 
-            // Erro
+            // retorna Erro caso não ha produtos a serem caregados
             if (state is ProductListFailureState) {
               return Center(
                 child: Padding(
@@ -121,7 +121,7 @@ class ProductListPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'Ops! Algo deu errado.',
+                        'Ops Algo deu errado.',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -148,7 +148,7 @@ class ProductListPage extends StatelessWidget {
               );
             }
 
-            // Estado inicial
+            // pagina  inicial
             return const Center(
               child: CircularProgressIndicator(),
             );

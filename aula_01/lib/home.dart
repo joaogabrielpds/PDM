@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'pages/product_list_page.dart';
 
+// Página inicial da aplicação.
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -10,6 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F6FA),
 
+      // Barra superior com o nome da loja virtual.
       appBar: AppBar(
         title: const Text(
           'loja virtual',
@@ -26,6 +28,7 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
 
+        // Organiza os elementos da página verticalmente.
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,15 +55,16 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-         
             const SizedBox(height: 16),
 
-            
+            // Cria o cartão que direciona para o catálogo de produtos.
             _buildModuleCard(
               context: context,
               title: 'Catálogo de Produtos',
               description: 'Explore os produtos disponíveis.',
               icon: Icons.shopping_bag_outlined,
+
+              // Navega para a tela de produtos ao clicar no cartão.
               onTap: () {
                 Navigator.push(
                   context,
@@ -76,6 +80,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  // Método reutilizável responsável por construir os cartões dos módulos.
   Widget _buildModuleCard({
     required BuildContext context,
     required String title,
@@ -92,6 +97,7 @@ class HomePage extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(18),
 
+        // Exibe o ícone do módulo.
         leading: CircleAvatar(
           radius: 27,
           backgroundColor: const Color(0xFFE9EAF8),
@@ -121,6 +127,7 @@ class HomePage extends StatelessWidget {
           color: Colors.grey,
         ),
 
+        // Executa a ação recebida quando o cartão é clicado.
         onTap: onTap,
       ),
     );

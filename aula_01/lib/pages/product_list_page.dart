@@ -12,11 +12,14 @@ class ProductListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Disponibiliza o BLoC e inicia o carregamento dos produtos.
     return BlocProvider(
       create: (_) => ProductListBloc(ProductRepository())
         ..add(LoadProductListEvent()),
+
       child: Scaffold(
         backgroundColor: const Color(0xFFF5F6FA),
+
         appBar: AppBar(
           title: const Text(
             'Catálogo de Produtos',
@@ -27,16 +30,19 @@ class ProductListPage extends StatelessWidget {
           backgroundColor: Colors.white,
           foregroundColor: Colors.black87,
         ),
+
+        // Escuta as mudanças de estado do BLoC e atualiza a interface.
         body: BlocBuilder<ProductListBloc, ProductListState>(
           builder: (context, state) {
-            // Carregamento da pagina 
+
+            // Exibe um indicador enquanto os produtos são carregados.
             if (state is ProductListLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
 
-            // amostragem dos Produtos carregados
+            // Exibe os produtos quando o carregamento é concluído.
             if (state is ProductListLoadedState) {
               if (state.products.isEmpty) {
                 return const Center(
@@ -44,6 +50,7 @@ class ProductListPage extends StatelessWidget {
                 );
               }
 
+              // Cria uma lista dinâmica com os produtos recebidos.
               return ListView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: state.products.length,
@@ -59,28 +66,29 @@ class ProductListPage extends StatelessWidget {
                     ),
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(16),
-                                        
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        product.imagemUrl,
-                        width: 75,
-                        height: 75,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            width: 75,
-                            height: 75,
-                            color: Colors.grey.shade200,
-                            child: const Icon(
-                              Icons.image_not_supported,
-                              size: 30,
-                              color: Colors.grey,
-                            ),
-                          );
-                        },
+
+                      // Exibe a imagem do produto e trata possíveis erros.
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          product.imagemUrl,
+                          width: 75,
+                          height: 75,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              width: 75,
+                              height: 75,
+                              color: Colors.grey.shade200,
+                              child: const Icon(
+                                Icons.image_not_supported,
+                                size: 30,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
 
                       title: Text(
                         product.nome,
@@ -106,7 +114,7 @@ class ProductListPage extends StatelessWidget {
               );
             }
 
-            // retorna Erro caso não ha produtos a serem caregados
+            // Exibe uma mensagem de erro e permite tentar novamente.
             if (state is ProductListFailureState) {
               return Center(
                 child: Padding(
@@ -135,6 +143,7 @@ class ProductListPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       ElevatedButton.icon(
                         onPressed: () {
+                          // Envia novamente o evento para carregar os produtos.
                           context.read<ProductListBloc>().add(
                                 LoadProductListEvent(),
                               );
@@ -148,7 +157,7 @@ class ProductListPage extends StatelessWidget {
               );
             }
 
-            // pagina  inicial
+            // Estado inicial: mantém o indicador de carregamento.
             return const Center(
               child: CircularProgressIndicator(),
             );
